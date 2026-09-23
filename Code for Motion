@@ -4,14 +4,21 @@ import sympy as sp
 t = sp.Symbol('t')
 v = 100
 theta = sp.pi/4
-v_vector = sp.Matrix([v*sp.cos(theta), v*sp.sin(theta)])
-v_y0 = v_vector[1]
-x0 = 0
 acceleration = -9.81
+x0 = 0
 
-#Calculus and display
-velocity = sp.integrate(acceleration, t) + v_y0
-position = sp.integrate(velocity, t) + x0
+# FUNction
+def high_school_motion(velocity, angle, height, gravity):
+  acceleration = gravity
+  v_vector = sp.Matrix([velocity*sp.cos(angle), velocity*sp.sin(angle)]
+  v_y0 = v_vector[1]
+  x0 = height
+  velocity = sp.integrate(acceleration, t) + v_vy0
+  position = sp.integrate(velocity, t) + x0
+  landing = sp.solve(position)
+  return acceleration, velocity, position, landing
 
-display(acceleration, velocity, position)
-display(sp.solve(position))
+#Call the function
+#use: (velocity, angle, height, gravity)
+display(high_school_motion(v, theta, x0, acceleration))
+
