@@ -1,0 +1,17 @@
+import sympy as sp
+
+#Set terms and constants
+t = sp.Symbol('t')
+v = 100
+theta = sp.pi/4
+v_vector = sp.Matrix([v*sp.cos(theta), v*sp.sin(theta)])
+v_y0 = v_vector[1]
+x0 = 0
+acceleration = -9.81
+
+#Calculus and display
+velocity = sp.integrate(acceleration, t) + v_y0
+position = sp.integrate(velocity, t) + x0
+
+display(acceleration, velocity, position)
+display(sp.solve(position))
