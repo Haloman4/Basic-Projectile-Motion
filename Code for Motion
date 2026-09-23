@@ -10,15 +10,15 @@ x0 = 0
 # FUNction
 def high_school_motion(velocity, angle, height, gravity):
   acceleration = gravity
-  v_vector = sp.Matrix([velocity*sp.cos(angle), velocity*sp.sin(angle)]
+  v_vector = sp.Matrix([velocity*sp.cos(angle), velocity*sp.sin(angle)])
   v_y0 = v_vector[1]
   x0 = height
-  velocity = sp.integrate(acceleration, t) + v_vy0
+  velocity = sp.integrate(acceleration, t) + v_v0
   position = sp.integrate(velocity, t) + x0
   landing = sp.solve(position)
-  return acceleration, velocity, position, landing
+  display(acceleration, velocity, position, landing)
 
 #Call the function
 #use: (velocity, angle, height, gravity)
-display(high_school_motion(v, theta, x0, acceleration))
+high_school_motion(v, theta, x0, acceleration)
 
