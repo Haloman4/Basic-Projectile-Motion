@@ -3,20 +3,23 @@ import sympy as sp
 
 #### High School Physics
 
+
+t = sp.Symbol('t', real = True)
+
 # Parameters
 acceleration = -9.81 * t
 velocity = 1
 height = 1
 angle = sp.pi / 2
 
+# If you've never used numpy(or forgot) then the order is this:
+# np.arange(start, end, number of divisions)
+t_values = np.arange(0, 6, 1)
+
 # Use this if you want to change the vector itself, instead of using the magnitude 
 v_vector = sp.Matrix([velocity * sp.cos(angle), velocity * sp.sin(angle)])
 
-t = sp.Symbol('t', real = True)
-# If you've never used numpy(or forgot) then the order is this:
-# np.arange(start, end, number of divisions)
-t_values = np.linspace(0, 5, 4)
-#test of using the display() and sp.Eq() properly
+
 
 # Function to get the equations for velocity and position based on initial conditions
 
