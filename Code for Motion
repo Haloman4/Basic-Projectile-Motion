@@ -1,23 +1,56 @@
+import numpy as np
 import sympy as sp
 
-#Set terms and constants
-t = sp.Symbol('t')
-v = 100
-theta = sp.pi/4
-acceleration = -9.81
-x0 = 0
+#### High School Physics
 
-# FUNction
-def high_school_motion(velocity, angle, height, gravity):
-  acceleration = -abs(gravity)
-  v_vector = sp.Matrix([velocity*sp.cos(angle), velocity*sp.sin(angle)])
-  v_y0 = v_vector[1]
-  velocity = sp.integrate(acceleration, t) + v_v0
-  position = sp.integrate(velocity, t) + height
-  landing = sp.solve(position)
-  display(acceleration, velocity, position, landing)
+# Parameters
+acceleration = -9.81 * t
+velocity = 1
+height = 1
+angle = sp.pi / 2
 
-#Call the function
-#use: (velocity, angle, height, gravity)
-high_school_motion(v, theta, x0, acceleration)
+# Use this if you want to change the vector itself, instead of using the magnitude 
+v_vector = sp.Matrix([velocity * sp.cos(angle), velocity * sp.sin(angle)])
 
+t = sp.Symbol('t', real = True)
+# If you've never used numpy(or forgot) then the order is this:
+# np.arange(start, end, number of divisions)
+t_values = np.linspace(0, 5, 4)
+#test of using the display() and sp.Eq() properly
+
+# Function to get the equations for velocity and position based on initial conditions
+
+def Motion(acceleration, velocity, angle, height):
+  display("Acceleration:", acceleration)
+  display("Velocity vector:", v_vector)
+  vertical_v = v_vector[1]
+  display("Vertical velocity:", vertical_v)
+  velocity_eq = sp.integrate(acceleration, t) + vertical_v
+  display("Velocity equation:", velocity_eq)
+  position_eq = sp.integrate(velocity_eq, t) + height
+  display("Position equation:", position_eq)
+  zeroes = (sp.solve(position_eq))
+  print(f"Landing zones: {zeroes}")
+  return velocity_eq, position_eq
+
+# Prints the equations, for your convenience 
+
+Motion(acceleration, v_vector, angle, height)
+
+velocity_eq, position_eq = Motion(acceleration, v_vector, angle, height)
+
+# Function to get the values of velocity and height, using numpy
+def Motion_values(velocity_eq, position_eq, t_values):
+  numpy_v = sp.lambdify(t, velocity_eq, 'numpy')
+  #display(numpy_v)
+  numpy_p = sp.lambdify(t, position_eq, 'numpy')
+  # Run the velocity and position functions
+  v_values = numpy_v(t_values)
+  p_values = numpy_p(t_values)
+# Display the values
+  print(f"Time values: {t_values}")
+  print(f"Velocity values: {v_values}")
+  print(f"Position values: {p_values}")
+
+# Print the values
+Motion_values(velocity_eq, position_eq, t_values)
