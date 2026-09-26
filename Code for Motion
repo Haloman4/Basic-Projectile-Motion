@@ -1,5 +1,6 @@
 import numpy as np
 import sympy as sp
+import matplotlib.pyplot as plt
 
 #### High School Physics
 
@@ -17,8 +18,6 @@ angle = sp.pi / 2
 t_values = np.arange(0, 6, 1)
 
 # Use this if you want to change the vector itself, instead of using the magnitude
-# If you are doing it this way, make sure to keep track of how velocity and v_vector are not always the same,
-# especially if you modified v_vector to not include the velocity parameter in it
 v_vector = sp.Matrix([velocity * sp.cos(angle), velocity * sp.sin(angle)])
 
 
@@ -53,7 +52,20 @@ def Motion_values(velocity_eq, position_eq, t_values):
   print(f"Time values: {t_values}")
   print(f"Velocity values: {v_values}")
   print(f"Position values: {p_values}")
+  return v_values, p_values
 
 # Print and display all the values
 
 Motion_values(velocity_eq, position_eq, t_values)
+
+
+# Plot of the particle's height over time
+#NOTE: Doing it this way, the output of Motion_values is like a matrix, where [0]=v_values and [1]=p_values
+v_values = Motion_values(velocity_eq, position_eq, t_values)[0]
+p_values = Motion_values(velocity_eq, position_eq, t_values)[1]
+plt.plot(p_values)
+plt.ylabel('Height:')
+plt.show()
+plt.plot(v_values)
+plt.ylabel('Velocity:')
+plt.show()
