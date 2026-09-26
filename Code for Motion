@@ -7,16 +7,18 @@ import sympy as sp
 t = sp.Symbol('t', real = True)
 
 # Parameters
-acceleration = -9.81 * t
-velocity = 1
+acceleration = -9.81
+velocity = -1
 height = 1
 angle = sp.pi / 2
 
 # If you've never used numpy(or forgot) then the order is this:
-# np.arange(start, end, number of divisions)
+# np.arange(start, end, length of divisions)
 t_values = np.arange(0, 6, 1)
 
-# Use this if you want to change the vector itself, instead of using the magnitude 
+# Use this if you want to change the vector itself, instead of using the magnitude
+# If you are doing it this way, make sure to keep track of how velocity and v_vector are not always the same,
+# especially if you modified v_vector to not include the velocity parameter in it
 v_vector = sp.Matrix([velocity * sp.cos(angle), velocity * sp.sin(angle)])
 
 
@@ -36,10 +38,7 @@ def Motion(acceleration, velocity, angle, height):
   print(f"Landing zones: {zeroes}")
   return velocity_eq, position_eq
 
-# Prints the equations, for your convenience 
-
-Motion(acceleration, v_vector, angle, height)
-
+#Sets the velocity and position up for the Numpy section
 velocity_eq, position_eq = Motion(acceleration, v_vector, angle, height)
 
 # Function to get the values of velocity and height, using numpy
@@ -55,5 +54,6 @@ def Motion_values(velocity_eq, position_eq, t_values):
   print(f"Velocity values: {v_values}")
   print(f"Position values: {p_values}")
 
-# Print the values
+# Print and display all the values
+
 Motion_values(velocity_eq, position_eq, t_values)
